@@ -107,6 +107,65 @@ string AskToPlayAgain(string userName) {
         return response;
     };
 
+    void DisplaySummaryReport(const vector<vector<int>> &allQuestions);{
+        int totalCorrect = 0, totalIncorrect = 0;
+
+        cout << "*********************************" << endl;
+        cout << "         Summary Report          " << endl;
+        cout << "*********************************" << endl;
+        cout << "Level      Question      Attempts " << endl;
+        cout << "----- ------------------ ---------" << endl;
+
+        for (const auto &row : allQuestions) {
+            int level = row[0];
+            int leftNum = row[1];
+            char mathSymbol = static_cast<char>(row[2]);
+            int rightNum = row[3];
+            int correctAnswer = row[4];
+            int attempts = row[5];
+
+            cout << "  " << setw(2) << right << level << "  "
+                 << setw(3) << right << leftNum << " "
+                 << mathSymbol << " "
+                 << setw(3) << left << rightNum
+                 << " = "
+                 << setw(3) << right << correctAnswer;
+
+            if (attempts > 0) {
+                cout << "       " << attempts << endl;
+                totalCorrect++;
+            } else {
+                cout << "  Incorrect" << endl;
+                totalIncorrect++;
+            }
+        }
+
+        cout << "Total Questions: " << totalCorrect + totalIncorrect << endl;
+        cout << "Total Correct  : " << totalCorrect << endl;
+        cout << "Total Incorrect: " << totalIncorrect << endl;
+        cout << "*********************************" << endl;
+    }
+
+    void CheckForLevelChange(int& totalIncorrect, int& totalCorrect, int& mathLevel, int& currentRange) {
+        if (totalCorrect >= 3) {
+            mathLevel++;
+            currentRange += 10; // Increase range for difficulty
+            totalCorrect = 0;   // Reset streak
+            cout << "Level up! You are now on level " << mathLevel << endl;
+        } else if (totalIncorrect >= 3) {
+            if (mathLevel > 1) {
+                mathLevel--;
+                currentRange -= 10; // Decrease range for easier difficulty
+                totalIncorrect = 0; // Reset streak
+                cout << "Level down! You are now on level " << mathLevel << endl;
+            } else {
+                cout << "You are at the lowest level. You cannot go any lower!" << endl;
+                totalIncorrect = 0;
+            }
+        }
+    }
+
+
     /* this is the thingy that allows the user to type things in the running code, I
      * was glad I went back a little ways in the zybooks to find an example. testing */
     int main(){
