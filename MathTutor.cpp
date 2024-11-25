@@ -143,6 +143,7 @@ string AskToPlayAgain(string userName) {
         cout << "Total Incorrect: " << totalIncorrect << endl;
         cout << "*********************************" << endl;
     }
+
     void CheckForLevelChange(int& totalIncorrect, int& totalCorrect, int& mathLevel, int& currentRange) {
         if (totalCorrect >= 3) {
             mathLevel++;
