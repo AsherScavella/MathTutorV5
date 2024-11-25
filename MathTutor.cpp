@@ -92,12 +92,9 @@ int main() {
     vector<vector<int>> questions;
 
     srand(time(nullptr));
-
-    string GetUserName();
-    {
-        string userName = "?";
-
-        {
+    DisplayGameIntro();
+    string GetUserName(); {
+        string userName;
             // This is where the user can enter there name and then the code welcomes them
             // with their name
             cout << "What is your name? ";
