@@ -91,6 +91,7 @@ int GetNumericValue()
         cout << "\tPlease enter a number: ";
     }
 };
+
 string AskToPlayAgain(string userName) {
     string response;
     while(true) {
@@ -99,6 +100,7 @@ string AskToPlayAgain(string userName) {
         if(response == "yes" || response == "y" || response == "n" || response == "n") {
             break;
         }
+
         else {
             cout<< "Invalid input"<< endl;}
 
