@@ -69,6 +69,32 @@ void DisplayGameIntro()
     cout << endl;
 
 };
+
+string GetUserName() {
+    string userName;
+    // This is where the user can enter there name and then the code welcomes them
+    // with their name
+    cout << "What is your name? ";
+    getline(cin, userName);
+    cout << endl;
+    cout << "Welcome " << userName << " to the easy math tutor!" << endl;
+    cout << endl;
+}
+int GetNumericValue()
+{
+    int userAnswer;
+    while (!(cin >> userAnswer)) {
+        cin.clear(); // clear the cin error flag
+        //need to include the limits library to use numeric_limits
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); //ignore the max input, up to '\n'
+        cout << "Invalid input!" << endl;
+        cout << "\tPlease enter a number: ";
+    }
+};
+string AskToPlayAgain(string userName)
+{
+
+};
 /* this is the thingy that allows the user to type things in the running code, I
  * was glad I went back a little ways in the zybooks to find an example. testing */
 int main() {
@@ -92,17 +118,9 @@ int main() {
     vector<vector<int>> questions;
 
     srand(time(nullptr));
+
     DisplayGameIntro();
-    string GetUserName(); {
-        string userName;
-            // This is where the user can enter there name and then the code welcomes them
-            // with their name
-            cout << "What is your name? ";
-            getline(cin, userName);
-            cout << endl;
-            cout << "Welcome " << userName << " to the easy math tutor!" << endl;
-            cout << endl;
-        }
+
         do {
             leftNum = rand() % (levelChange * mathLevel) + 1;
             rightNum = rand() % (levelChange * mathLevel) + 1;
@@ -145,13 +163,7 @@ int main() {
 
             for (int i = 1; i <= NUM_ATTEMPTS; i++) {
                 cout << "[Level #" << mathLevel << "] " << "What is " << leftNum << " " << mathSymbol << " " << rightNum << " = ";
-                while (!(cin >> userAnswer)) {
-                    cin.clear(); // clear the cin error flag
-                    //need to include the limits library to use numeric_limits
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); //ignore the max input, up to '\n'
-                    cout << "Invalid input!" << endl;
-                    cout << "\tPlease enter a number: ";
-                }
+
                 if (userAnswer == correctAnswer) {
                     cout << "Good job! You got it correct!" << endl;
                     if (totalAccuracy < 0) {
