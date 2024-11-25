@@ -13,7 +13,7 @@ using namespace std;
 void DisplayGameIntro();
 string GetUserName();
 int GetNumericValue();
-string AskToPlayAgain(string userName);
+string AskToPlayAgain(string userName, int& currentRange, int& totalCorrect, int& mathLevel, int& totalIncorrect, int allQuestions);
 void DisplaySummaryReport(const vector<vector<int>> &allQuestions);
 vector<vector<int>> GenerateRandomQuestions(int mathLevel, int  currentRange);
 bool GiveThreeAttempts(string userName, vector<vector<int>> &currentQuestions, int totalCorrect, int totalIncorrect);
