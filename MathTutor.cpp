@@ -91,35 +91,45 @@ int GetNumericValue()
         cout << "\tPlease enter a number: ";
     }
 };
-string AskToPlayAgain(string userName)
-{
+string AskToPlayAgain(string userName) {
+    string response;
+    while(true) {
+        cout << "Would you like to continue playing, " << userName << "? (yes/no): ";
+        cin >> response;
+        if(response == "yes" || response == "y" || response == "n" || response == "n") {
+            break;
+        }
+        else {
+            cout<< "Invalid input"<< endl;}
 
-};
-/* this is the thingy that allows the user to type things in the running code, I
- * was glad I went back a little ways in the zybooks to find an example. testing */
-int main() {
-    const int NUM_ATTEMPTS = 3;
-    const int LEVEL_RANGE_CHANGE = 10;
-    int totalCorrect = 0;
-    int totalIncorrect = 0;
-    int mathLevel = 1;
-    int totalAccuracy = 0;
-    string userName = "?"; // This is so that the user can enter there name
-    string userInput = "?";
-    int userAnswer = 0;
-    int leftNum = 0;
-    int rightNum = 0;
-    enum MathType{MT_ADD, MT_SUB, MT_MUL, MT_DIV}; //Declares mathtype with values of the 4 types (+, -, *, /)
-    MathType mathType = MT_ADD;
-    int tempNum = 0;
-    int levelChange = 10;
-    int correctAnswer = 0;
-    char mathSymbol = '+';
-    vector<vector<int>> questions;
+        return response;
+    };
 
-    srand(time(nullptr));
+    /* this is the thingy that allows the user to type things in the running code, I
+     * was glad I went back a little ways in the zybooks to find an example. testing */
+    int main(){
+        const int NUM_ATTEMPTS = 3;
+        const int LEVEL_RANGE_CHANGE = 10;
+        int totalCorrect = 0;
+        int totalIncorrect = 0;
+        int mathLevel = 1;
+        int totalAccuracy = 0;
+        string userName = "?"; // This is so that the user can enter there name
+        string userInput = "?";
+        int userAnswer = 0;
+        int leftNum = 0;
+        int rightNum = 0;
+        enum MathType{MT_ADD, MT_SUB, MT_MUL, MT_DIV}; //Declares mathtype with values of the 4 types (+, -, *, /)
+        MathType mathType = MT_ADD;
+        int tempNum = 0;
+        int levelChange = 10;
+        int correctAnswer = 0;
+        char mathSymbol = '+';
+        vector<vector<int>> questions;
 
-    DisplayGameIntro();
+        srand(time(nullptr));
+
+        DisplayGameIntro();
 
         do {
             leftNum = rand() % (levelChange * mathLevel) + 1;
@@ -131,12 +141,12 @@ int main() {
 
             //This line randomly generates the equation for the user to attempt
             switch (mathType) {
-            case 0:                 // addition
-                mathSymbol = '+';
+                case 0:                 // addition
+                    mathSymbol = '+';
                 correctAnswer = leftNum + rightNum;
                 break;
-            case 1:                // subtraction
-                mathSymbol = '-';
+                case 1:                // subtraction
+                    mathSymbol = '-';
                 if (leftNum < rightNum) {               //ensure no negatives are given
                     tempNum = leftNum;
                     leftNum = rightNum;
@@ -144,17 +154,17 @@ int main() {
                 }
                 correctAnswer = leftNum - rightNum;
                 break;
-            case 2:                  // multiplication
-                mathSymbol = '*';
+                case 2:                  // multiplication
+                    mathSymbol = '*';
                 correctAnswer = leftNum * rightNum;
                 break;
-            case 3:                  // division
-                mathSymbol = '/';
+                case 3:                  // division
+                    mathSymbol = '/';
                 correctAnswer = leftNum;               // ensure solution is never a fraction
                 leftNum *= rightNum;
                 break;
-            default:               //ensuring system doesn't break when there is an invalid math type
-                cout << "Invalid Math Type is " << mathType << endl;
+                default:               //ensuring system doesn't break when there is an invalid math type
+                    cout << "Invalid Math Type is " << mathType << endl;
                 cout << "Ending Program." << endl;
                 return -1;
             }
@@ -262,3 +272,4 @@ int main() {
 
         return 0;
     }
+}
