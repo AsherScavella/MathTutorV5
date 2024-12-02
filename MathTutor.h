@@ -24,7 +24,4 @@ void CheckForLevelChange(int &totalIncorrect, int &totalCorrect, int &mathLevel,
 
 
 
-
-
-
 #endif //MATHTUTOR_H
