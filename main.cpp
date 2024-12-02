@@ -17,6 +17,9 @@ int main() {
     vector<vector<int> > questions; 
     string userName, userInput; 
     bool playAgain = true;
+    bool isCorrect = false;
+
+
 
     srand(time(0));
 
@@ -27,6 +30,16 @@ int main() {
     while (playAgain) {
         // Generate a random math question
         vector<int> question = GenerateRandomQuestion(mathLevel);
+
+        isCorrect = GiveThreeAttempts (userName,question);
+
+
+        if (isCorrect) {
+            totalCorrect++;
+        }else {
+            totalIncorrect++;
+        }
+
 
         // Allow the user to attempt the question
         GiveThreeAttempts(userName, question);
