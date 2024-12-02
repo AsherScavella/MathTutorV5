@@ -80,11 +80,11 @@ string AskToPlayAgain(string userName) {
 
 
 // It is the vector function that generates a random question and uses an "enum" and returns the
-vector<int> GenerateRandomQuestion(int mathLevel, int currentRange) {
+vector<int> GenerateRandomQuestion(int mathLevel) {
     enum MathType { MT_ADD = 1, MT_SUB, MT_MUL, MT_DIV };
     MathType questionType = static_cast<MathType>(rand() % 4 + 1);
-    int leftNum = rand() % currentRange + 1;
-    int rightNum = rand() % currentRange + 1;
+    int leftNum = rand() % LEVEL_RANGE_CHANGE + 1;
+    int rightNum = rand() % LEVEL_RANGE_CHANGE + 1;
     char symbol = '?';
     int correctAnswer = 0;
 
@@ -115,9 +115,10 @@ vector<int> GenerateRandomQuestion(int mathLevel, int currentRange) {
 }
 
 // function assigned to give 3 attempts to the user and return whether he or she got it true or not
-bool GiveThreeAttempts(string userName, vector<int> &currentQuestion, int &totalCorrect, int &totalIncorrect) {
+bool GiveThreeAttempts(string userName, vector<int> &currentQuestion) {
     int userAns = 0;
     bool isCorrect = false;
+
     for (int i = 1; i <= MAX_ATTEMPTS; ++i) {  // Shows what level the user is on
         cout << "[Level #" << currentQuestion[0] << "] " << userName
              << ", what is " << currentQuestion[1] << " "
@@ -128,7 +129,6 @@ bool GiveThreeAttempts(string userName, vector<int> &currentQuestion, int &total
         if (userAns == currentQuestion[4]) {
             cout << "Correct! Well done!" << endl;
             currentQuestion[5] = i;
-            totalCorrect++;
             isCorrect = true;
             break;
         } else {
@@ -138,9 +138,7 @@ bool GiveThreeAttempts(string userName, vector<int> &currentQuestion, int &total
     }
 
     if (!isCorrect) {
-        currentQuestion[5] = 0;
-        totalIncorrect++;
-        cout << "Out of attempts. The correct answer was: " << currentQuestion[4] << endl;
+        currentQuestion[5] = 0;cout << "Out of attempts. The correct answer was: " << currentQuestion[4] << endl;
     }
 
     return isCorrect;

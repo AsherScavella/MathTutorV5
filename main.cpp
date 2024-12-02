@@ -1,11 +1,12 @@
 
-#include "MathTutor.h"
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include <limits> 
-#include <vector> 
-#include <iomanip> 
+#include <vector>
+#include <iomanip>
+
+#include "MathTutor.h"
+
 using namespace std;
 
 int main() {
@@ -17,9 +18,7 @@ int main() {
     string userName, userInput; 
     bool playAgain = true;
 
-
     srand(time(0));
-
 
     DisplayGameIntro();
     userName = GetUserName();
@@ -27,10 +26,10 @@ int main() {
     // Shows if the user wants to play again
     while (playAgain) {
         // Generate a random math question
-        vector<int> question = GenerateRandomQuestion(mathLevel, currentRange);
+        vector<int> question = GenerateRandomQuestion(mathLevel);
 
         // Allow the user to attempt the question
-        GiveThreeAttempts(userName, question, totalCorrect, totalIncorrect);
+        GiveThreeAttempts(userName, question);
 
         // Record the question for the summary
         questions.push_back(question);
