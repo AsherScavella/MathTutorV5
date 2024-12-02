@@ -30,12 +30,12 @@ void DisplayGameIntro() {
     cout << endl;
 
     // Displaying for the User Fun Facts about Math that are Interesting.
-    cout << "-\tFun Math Facts! " << endl;
+    cout << "Fun Math Facts! " << endl;
     cout << endl;
-    cout << "\t    * The most used number in math is 3." << endl;
-    cout << "\t    * Every odd number has an (e) in it." << endl;
-    cout << "\t    * -40 Celcius is -40 Fahrenheit." << endl;
-    cout << "\t    * Zero is not represented in Roman numerals." << endl;
+    cout << "The most used number in math is 3." << endl;
+    cout << "Every odd number has an (e) in it." << endl;
+    cout << "-40 Celcius is -40 Fahrenheit." << endl;
+    cout << "Zero is not represented in Roman numerals." << endl;
     cout << endl;
     cout << " ______________________________________________________________ " << endl;
 
@@ -45,9 +45,9 @@ void DisplayGameIntro() {
 // The function below gets the users name ans returns it so it can be passed in other functions
 string GetUserName() {
     string userName;
-    cout << "*\tPlease enter your name: ";
+    cout << "Please enter your name: ";
     getline(cin, userName);
-    cout << endl << "*\tWelcome " << userName << " to the Math Tutor!" << endl;
+    cout << "Welcome " << userName << " to the Math Tutor!" << endl;
     return userName;
 }
 
@@ -57,7 +57,7 @@ int GetNumericValue() {
     while (!(cin >> userAns)) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "\tInvalid input! Please enter a number: ";
+        cout << "Invalid input! Please enter a number: ";
     }
     return userAns;
 }
@@ -66,13 +66,13 @@ int GetNumericValue() {
 string AskToPlayAgain(string userName) {
     string userInput;
     while (true) {
-        cout << "*\tDo you want to continue, " << userName << "? (y=yes | n=no): ";
+        cout << "Do you want to continue, " << userName << "? (y=yes | n=no): ";
         cin >> userInput;
         for (auto &c: userInput) c = tolower(c); // Gets the user input for if they want to continue
         if (userInput == "y" || userInput == "yes" || userInput == "n" || userInput == "no") {
             break;
         } else {
-            cout << "*\tInvalid input, please try again..." << endl;
+            cout << "Invalid input, please try again..." << endl;
         }
     }
     return userInput; // returns a string
@@ -126,13 +126,13 @@ bool GiveThreeAttempts(string userName, vector<int> &currentQuestion, int &total
 
         // Check if the answer is correct
         if (userAns == currentQuestion[4]) {
-            cout << "\tCorrect! Well done!" << endl;
+            cout << "Correct! Well done!" << endl;
             currentQuestion[5] = i;
             totalCorrect++;
             isCorrect = true;
             break;
         } else {
-            cout << "\tIncorrect. ";
+            cout << "Incorrect. ";
             if (i < MAX_ATTEMPTS) cout << "Try again." << endl; // Shows how many attempts they have left
         }
     }
@@ -140,7 +140,7 @@ bool GiveThreeAttempts(string userName, vector<int> &currentQuestion, int &total
     if (!isCorrect) {
         currentQuestion[5] = 0;
         totalIncorrect++;
-        cout << "\tOut of attempts. The correct answer was: " << currentQuestion[4] << endl;
+        cout << "Out of attempts. The correct answer was: " << currentQuestion[4] << endl;
     }
 
     return isCorrect;
@@ -155,13 +155,13 @@ void CheckForLevelChange(int &totalCorrect, int &totalIncorrect, int &mathLevel,
         currentRange += LEVEL_RANGE_CHANGE; // Increase range to have harder questions
         totalCorrect = 0; // Shows the user how many answers they got correct
         totalIncorrect = 0; // Shows the user how many answers they got incorrect
-        cout << "*\tLeveling up to Level " << mathLevel << ". Range: 1-" << currentRange << endl;
+        cout << "Leveling up to Level " << mathLevel << ". Range: 1-" << currentRange << endl;
     } else if (totalIncorrect >= 3 && mathLevel > 1) {
         mathLevel--; // Decreases the math level
         currentRange -= LEVEL_RANGE_CHANGE; // Decrease range for easier questions
         totalCorrect = 0; // Shows the user how many answers they got correct
         totalIncorrect = 0; // Shows the user how many answers they got incorrect
-        cout << "*\tLeveling down to Level " << mathLevel << ". Range: 1-" << currentRange << endl;
+        cout << "Leveling down to Level " << mathLevel << ". Range: 1-" << currentRange << endl;
     } else if (totalIncorrect >= 3) {
         mathLevel--; // If all the questions are wrong then you failed because the level cannot decrease anymore
         totalCorrect = 0; // Shows the user how many answers they got correct
